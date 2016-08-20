@@ -9,13 +9,16 @@
 	url = https://github.com/Itseez/opencv.git
 [submodule "caffe"]
 	path = caffe
-	url = https://github.com/sh1r0/caffe.git
-[submodule "android-cmake"]
-	path = android-cmake
-	url = https://github.com/sh1r0/android-cmake.git
+	url = https://github.com/intelfx/caffe.git
 [submodule "lmdb"]
 	path = lmdb
 	url = https://github.com/LMDB/lmdb.git
 [submodule "glog"]
 	path = glog
-	url = https://github.com/sh1r0/glog.git
+	url = https://github.com/intelfx/glog.git
+[submodule "gflags"]
+	path = gflags
+	url = https://github.com/gflags/gflags.git
+[submodule "caffe_jni"]
+	path = caffe_jni
+	url = https://github.com/intelfx/caffe_jni.git

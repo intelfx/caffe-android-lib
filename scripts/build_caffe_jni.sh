@@ -3,11 +3,11 @@ set -e
 
 . ./scripts/check_env.sh
 
-pushd gflags
+pushd caffe_jni
 
 rm -rf build
 mkdir -p build
-pushd build
+cd build
 
 "${CMAKE_NDK[@]}" \
       -DCMAKE_INSTALL_PREFIX="$INSTALL_DIR" \

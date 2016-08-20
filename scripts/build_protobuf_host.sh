@@ -1,28 +1,21 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -e
 
-WD=$(readlink -f "`dirname $0`/..")
-PROTOBUF_ROOT=${WD}/protobuf
-BUILD_DIR=${PROTOBUF_ROOT}/build_host
-INSTALL_DIR=${WD}/android_lib
-N_JOBS=${N_JOBS:-4}
+. ./scripts/check_env.sh
 
-if [ -f "${INSTALL_DIR}/protobuf_host/bin/protoc" ]; then
-    echo "Found host protoc"
-    exit 0
-fi
+pushd protobuf
 
-rm -rf "${BUILD_DIR}"
-mkdir -p "${BUILD_DIR}"
-cd "${BUILD_DIR}"
+rm -rf build-host
+mkdir -p build-host
+pushd build-host
 
-cmake -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}/protobuf_host" \
-      -Dprotobuf_BUILD_TESTS=OFF \
-      ../cmake
+"${CMAKE_HOST[@]}" \
+	-Dprotobuf_BUILD_TESTS=OFF \
+	-DCMAKE_INSTALL_PREFIX="$INSTALL_DIR_HOST" \
+	../cmake
 
-make -j${N_JOBS}
-rm -rf "${INSTALL_DIR}/protobuf_host"
-make install/strip
+"${MAKE[@]}"
+"${MAKE[@]}" install/strip
 
-cd "${WD}"
-rm -rf "${BUILD_DIR}"
+popd
+#rm -rf build-host

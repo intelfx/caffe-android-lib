@@ -1,39 +1,57 @@
 Caffe-Android-Lib
 ===============
 ## Goal
-Porting [caffe](https://github.com/BVLC/caffe) to android platform
+Porting [caffe](https://github.com/BVLC/caffe) to Android platform
 
 ### Support
-* Up-to-date caffe ([e79bc8f](https://github.com/BVLC/caffe/commit/e79bc8f1f6df4db3a293ef057b7ca5299c01074a))
+* Up-to-date caffe fork with specific buildsystem changes ([intelfx/caffe](https://github.com/intelfx/caffe/tree/android))
 * CPU only
-* Without support for some IO libs (leveldb and hdf5)
+* Without support for certain IO libraries (leveldb and hdf5)
 
-## Build
-Tested with Android NDK r11c and cmake 3.3.2 on Ubuntu 14.04
+## Building
+
+* [Android CrystaX NDK](https://www.crystax.net/en) [10.4.0 build 900](https://dl.crystax.net/builds/900/) or newer
+* CMake 3.2 or newer recommended
 
 ```shell
-git clone --recursive https://github.com/sh1r0/caffe-android-lib.git
+git clone --recursive https://github.com/intelfx/caffe-android-lib.git
 cd caffe-android-lib
-./build.sh <path/to/ndk>
+[VARIABLES...] ./build.sh [<path/to/ndk>] [<components:to:build>]
 ```
+
+### Configuration
+
+The build script is configured with environment variables:
+
+Variable       | Default                      | Effect
+-------------- | ---------------------------- | --------------------------------------------------------
+`ANDROID_ABI`  | `armeabi-v7a-hard with NEON` | Selects the target ABI, matches `APP_ABI` from ndk-build
+`N_JOBS`       | logical CPU count            | `make -jN`
+`USE_OPENBLAS` | `1`                          | Whether to build with OpenBLAS (and not with Eigen)
+`ANDROID_NDK`  | none                         | Path to the CrystaX NDK
+`BUILD_ONLY`   | empty, i. e. build all       | Colon-separated list of components to build or to skip
+
+
+### `ANDROID_ABI`
+
+ABIs are explained in the `cmake/toolchain.cmake` file in the CrystaX NDK distribution. Possible ABIs are:
+
+- `armeabi` --- ARMv5TE (software floating-point)
+- `armeabi-v6+vfp` --- ARMv6 (VFP, softfp ABI)
+- `armeabi-v7a` --- ARMv7-A (VFPv2, softfp ABI)
+- `armeabi-v7a+vfpv3` --- ARMv7-A (VFPv3, softfp ABI)
+- `armeabi-v7a+neon` --- ARMv7-A (NEON, softfp ABI)
+- `armeabi-v7a-hard*` --- substitute instead of `armeabi-v7a` for hardfp ABI
+- `arm64-v8a` --- ARMv8
+- `x86`, `x86_64` --- self-explanatory
+
+**Note: OpenBLAS supports only ARMv5 and ARMv7 with hardfp ABI.**
 
 ### OpenBLAS
-In general, Eigen is used as the underlying BLAS library to build caffe in this project.
-But if you hope to use OpenBLAS instead, please check the following steps.
 
-```shell
-# 1. set OpenBLAS usage explicitly
-export USE_OPENBLAS=1  # if 0, Eigen is used
+We build with OpenBLAS by default. You can pass `USE_OPENBLAS=0` for Eigen.
 
-# 2. only following ANDROID_ABIs are supported
-# "armeabi", "armeabi-v7a-hard-softfp with NEON", "arm64-v8a", and "x86_64"
-export ANDROID_ABI="armeabi-v7a-hard-softfp with NEON"  # for example
-
-# 3. Build
-./build.sh <path/to/ndk>
-```
-
-## Issues
+#### Issues with Eigen
 - Caffe build with Eigen cannot pass some tests ([ref](https://github.com/BVLC/caffe/pull/2619#issuecomment-113224948))
 
 If anyone has any idea about the above issues, please let me know.
@@ -45,11 +63,3 @@ Thanks.
 - [ ] add IO dependency support (i.e., leveldb and hdf5)
 - [ ] OpenCL support
 - [ ] CUDA suuport
-
-## Optional
-`.envrc` files are for [direnv](http://direnv.net/)
-> direnv is an environment variable manager for your shell. It knows how to hook into bash, zsh and fish shell to load or unload environment variables depending on your current directory. This allows to have project-specific environment variables and not clutter the "~/.profile" file.
-
-## Dependency
-* Eigen 3
-* ...
