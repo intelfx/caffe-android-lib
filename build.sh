@@ -130,6 +130,7 @@ function build_if() {
 }
 
 build_if blas      ./scripts/build_openblas.sh
+build_if opencl    ./scripts/build_opencl.sh
 build_if gflags    ./scripts/build_gflags.sh
 build_if glog      ./scripts/build_glog.sh
 build_if lmdb      ./scripts/build_lmdb.sh
