@@ -4,12 +4,7 @@ set -e
 . ./scripts/check_env.sh
 
 OPENCV_DIR="$INSTALL_DIR/sdk/native/jni"
-
-if (( USE_OPENBLAS )); then
-    BLAS=open
-else
-    BLAS=eigen
-fi
+BLAS=open
 
 pushd caffe
 

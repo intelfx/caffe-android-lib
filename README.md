@@ -27,7 +27,6 @@ Variable       | Default                      | Effect
 -------------- | ---------------------------- | --------------------------------------------------------
 `ANDROID_ABI`  | `armeabi-v7a-hard with NEON` | Selects the target ABI, matches `APP_ABI` from ndk-build
 `N_JOBS`       | logical CPU count            | `make -jN`
-`USE_OPENBLAS` | `1`                          | Whether to build with OpenBLAS (and not with Eigen)
 `ANDROID_NDK`  | none                         | Path to the CrystaX NDK
 `BUILD_ONLY`   | empty, i. e. build all       | Colon-separated list of components to build or to skip
 
@@ -46,17 +45,6 @@ ABIs are explained in the `cmake/toolchain.cmake` file in the CrystaX NDK distri
 - `x86`, `x86_64` --- self-explanatory
 
 **Note: OpenBLAS supports only ARMv5 and ARMv7 with hardfp ABI.**
-
-### OpenBLAS
-
-We build with OpenBLAS by default. You can pass `USE_OPENBLAS=0` for Eigen.
-
-#### Issues with Eigen
-- Caffe build with Eigen cannot pass some tests ([ref](https://github.com/BVLC/caffe/pull/2619#issuecomment-113224948))
-
-If anyone has any idea about the above issues, please let me know.
-Any comments or issues are also welcomed.
-Thanks.
 
 ## TODO
 - [ ] integrate using CMake's ExternalProject

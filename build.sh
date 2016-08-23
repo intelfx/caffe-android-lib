@@ -21,7 +21,6 @@ export INSTALL_DIR_HOST="$WD/prefix-host"
 #
 export ANDROID_ABI="${ANDROID_ABI:-"armeabi-v7a-hard with NEON"}"
 export N_JOBS=${N_JOBS:-$(grep '^processor' /proc/cpuinfo | wc -l)}
-export USE_OPENBLAS=${USE_OPENBLAS:-1}
 
 if [[ ${1+x} ]]; then
 	export ANDROID_NDK="$1"
@@ -130,12 +129,7 @@ function build_if() {
 	fi
 }
 
-if (( USE_OPENBLAS )); then
-	build_if blas ./scripts/build_openblas.sh
-else
-	build_if blas ./scripts/get_eigen.sh
-fi
-
+build_if blas      ./scripts/build_openblas.sh
 build_if gflags    ./scripts/build_gflags.sh
 build_if glog      ./scripts/build_glog.sh
 build_if lmdb      ./scripts/build_lmdb.sh
