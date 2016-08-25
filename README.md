@@ -1,11 +1,11 @@
 Caffe-Android-Lib
 ===============
 ## Goal
-Porting [caffe](https://github.com/BVLC/caffe) to Android platform
+Porting [caffe/OpenCL](https://github.com/naibaf7/caffe) to Android platform
 
 ### Support
 * Up-to-date caffe fork with specific buildsystem changes ([intelfx/caffe](https://github.com/intelfx/caffe/tree/android))
-* CPU only
+* CPU or OpenCL
 * Without support for certain IO libraries (leveldb and hdf5)
 
 ## Building
@@ -49,5 +49,5 @@ ABIs are explained in the `cmake/toolchain.cmake` file in the CrystaX NDK distri
 ## TODO
 - [ ] integrate using CMake's ExternalProject
 - [ ] add IO dependency support (i.e., leveldb and hdf5)
-- [ ] OpenCL support
+- [X] OpenCL support
 - [ ] CUDA suuport

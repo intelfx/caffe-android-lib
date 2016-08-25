@@ -3,15 +3,18 @@ set -e
 
 . ./scripts/check_env.sh
 
-pushd OpenCL
+pushd viennacl
 
 rm -rf build
 mkdir -p build
 pushd build
 
 "${CMAKE_NDK[@]}" \
-      -DCMAKE_INSTALL_PREFIX="$INSTALL_DIR" \
-      ..
+	-DCMAKE_INSTALL_PREFIX="$INSTALL_DIR" \
+	-DBUILD_EXAMPLES=OFF \
+	-DBUILD_TESTING=OFF \
+	-DENABLE_OPENMP=ON \
+	..
 
 "${MAKE[@]}"
 "${MAKE[@]}" install/strip

@@ -15,7 +15,9 @@ cd build
 "${CMAKE_NDK[@]}" \
       -DBUILD_python=OFF \
       -DBUILD_docs=OFF \
-      -DCPU_ONLY=ON \
+      -DUSE_CUDA=OFF \
+      -DUSE_GREENTEA=ON \
+      -DUSE_CLBLAST=ON \
       -DUSE_LMDB=ON \
       -DUSE_LEVELDB=OFF \
       -DUSE_HDF5=OFF \
