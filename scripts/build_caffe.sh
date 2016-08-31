@@ -27,6 +27,7 @@ cd build
       -DOpenCV_DIR="$OPENCV_DIR" \
       -DPROTOBUF_PROTOC_EXECUTABLE="$(which protoc)" \
       -DCMAKE_INSTALL_PREFIX="$INSTALL_DIR" \
+      -DCMAKE_CXX_FLAGS="-l${INSTALL_DIR}/lib/libclblast_mali.so" \
       ..
 
 "${MAKE[@]}"

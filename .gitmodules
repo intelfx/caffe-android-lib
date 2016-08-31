@@ -25,3 +25,6 @@
 [submodule "viennacl-dev"]
 	path = viennacl
 	url = https://github.com/viennacl/viennacl-dev
+[submodule "CLBlast-overlay"]
+	path = CLBlast-overlay
+	url = https://github.com/intelfx/CLBlast
