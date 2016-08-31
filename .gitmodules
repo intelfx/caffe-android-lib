@@ -19,9 +19,6 @@
 [submodule "gflags"]
 	path = gflags
 	url = https://github.com/gflags/gflags.git
-[submodule "caffe_jni"]
-	path = caffe_jni
-	url = https://github.com/intelfx/caffe_jni.git
 [submodule "CLBlast"]
 	path = CLBlast
 	url = https://github.com/CNugteren/CLBlast
