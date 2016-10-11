@@ -100,6 +100,22 @@ mkdir -p "$INSTALL_DIR_HOST/bin"
 export PATH="$INSTALL_DIR_HOST/bin:$PATH"
 
 #
+# Sunrise by hand (copy shared runtime libraries to the prefix),
+# pending resolution of https://github.com/crystax/android-platform-ndk/issues/13
+#
+# FIXME get rid of this ASAP
+#
+
+ANDROID_ABI_NORMALIZED="${ANDROID_ABI}"
+ANDROID_ABI_NORMALIZED="${ANDROID_ABI_NORMALIZED% with*}"
+ANDROID_ABI_NORMALIZED="${ANDROID_ABI_NORMALIZED%+*}"
+
+install -dm755 "$INSTALL_DIR/lib"
+install -m644 \
+	"$ANDROID_NDK/sources/crystax/libs/$ANDROID_ABI_NORMALIZED/thumb/libcrystax.so" \
+	"$INSTALL_DIR/lib"
+
+#
 # Determine what do we want to build
 #
 

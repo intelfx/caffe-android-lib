@@ -21,6 +21,13 @@ check_env BIT
 check_env CROSS_SUFFIX
 check_env SYSROOT
 
+#
+# Avoid shared runtime as much as possible,
+# pending resolution of https://github.com/crystax/android-platform-ndk/issues/13
+#
+# FIXME get rid of this ASAP
+#
+
 CMAKE_NDK=(
 	${CMAKE:-cmake}
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/cmake/toolchain.cmake"
@@ -29,6 +36,8 @@ CMAKE_NDK=(
 	-DANDROID_ABI="$ANDROID_ABI"
 	-DANDROID_NATIVE_API_LEVEL=21
 	-DANDROID_TOOLCHAIN_VERSION="$ANDROID_TOOLCHAIN_VERSION"
+	-DANDROID_STL=gnustl_static
+	-DBoost_USE_STATIC_LIBS=ON
 )
 
 CMAKE_HOST=(
