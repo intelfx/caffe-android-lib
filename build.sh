@@ -159,4 +159,3 @@ build_if viennacl  ./scripts/build_viennacl.sh
 build_if clblast   ./scripts/build_clblast.sh
 
 build_if caffe     ./scripts/build_caffe.sh
-build_if caffe_jni ./scripts/build_caffe_jni.sh
