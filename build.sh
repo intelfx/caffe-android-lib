@@ -21,6 +21,7 @@ export INSTALL_DIR_HOST="$WD/prefix-host"
 #
 export ANDROID_ABI="${ANDROID_ABI:-"armeabi-v7a-hard with NEON"}"
 export N_JOBS=${N_JOBS:-$(grep '^processor' /proc/cpuinfo | wc -l)}
+export ANDROID_TOOLCHAIN_VERSION=gcc-5
 
 if [[ ${1+x} ]]; then
 	export ANDROID_NDK="$1"
@@ -51,25 +52,25 @@ export BIT
 
 case "$ANDROID_ABI" in
 "armeabi"*)
-	TOOLCHAIN_NAME=arm-linux-androideabi-4.9
+	TOOLCHAIN_NAME=arm-linux-androideabi-5
 	TOOLCHAIN_TUPLE=arm-linux-androideabi
 	PLATFORM_NAME=arch-arm
 	;;
 
 "arm64-v8a")
-	TOOLCHAIN_NAME=aarch64-linux-androideabi-4.9
+	TOOLCHAIN_NAME=aarch64-linux-androideabi-5
 	TOOLCHAIN_TUPLE=aarch64-linux-androideabi
 	PLATFORM_NAME=arch-arm64
 	;;
 
 "x86")
-	TOOLCHAIN_NAME=x86
+	TOOLCHAIN_NAME=x86-5
 	TOOLCHAIN_TUPLE=i686-linux-android
 	PLATFORM_NAME=arch-x86
 	;;
 
 "x86_64")
-	TOOLCHAIN_NAME=x86_64
+	TOOLCHAIN_NAME=x86_64-5
 	TOOLCHAIN_TUPLE=x86_64-linux-android
 	PLATFORM_NAME=arch-x86_64
 	;;
